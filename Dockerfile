@@ -13,11 +13,9 @@ RUN pip install -r ./requirements.txt
 
 COPY . .
 
-USER root
+USER 1000
 
 RUN chmod +x ./entrypoint.sh
-
-USER 1000
 
 EXPOSE 8000
 
