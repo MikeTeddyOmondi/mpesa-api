@@ -13,8 +13,8 @@ RUN pip install -r ./requirements.txt
 
 COPY . .
 
-RUN adduser -D user
-USER user
+# RUN adduser -D user
+# USER user
 
 RUN chmod +x ./entrypoint.sh
 
