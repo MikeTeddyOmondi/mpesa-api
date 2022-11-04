@@ -2,8 +2,10 @@ version: "3"
 
 services:
   mpesa_api:
-    build:
-      context: .
+    # build:
+    #   context: .
+    image: ranckosolutionsinc/mpesa-api:2.0
+    container_name: mpesa-api
     ports:
       - "8009:8000"
     volumes:
