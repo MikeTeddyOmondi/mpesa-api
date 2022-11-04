@@ -1,12 +1,13 @@
 version: "3"
 
 services:
-  mpesa_api: 
+  mpesa_api:
     build:
       context: .
     ports:
       - "8009:8000"
     volumes:
-      - ./app:/app
+      - ./:/src
+      - mpesa_api-static:/static
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
