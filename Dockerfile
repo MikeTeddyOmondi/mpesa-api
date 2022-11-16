@@ -1,24 +1,22 @@
-FROM python:3.10
-LABEL Company "Rancko Solutions LLC"
+FROM node:18.12-alpine
 
-ENV PYTHONUNBUFFERED 1
+WORKDIR /app
 
-RUN apt-get update && python -m pip install --upgrade pip && rm -rf /var/lib/apt/lists/*
+COPY package*.json .
 
-RUN mkdir /src
-WORKDIR /src
+ARG NODE_ENV
 
-COPY ./requirements.txt ./requirements.txt
-RUN pip install -r ./requirements.txt
+RUN if [ "$NODE_ENV" = "development" ]; \
+        then npm install; \
+        else npm install --only=production; \
+        fi
 
-COPY . .
-
-RUN chmod +x ./entrypoint.sh
+COPY . /app
 
 USER 1000
 
-EXPOSE 8000
+ENV PORT 8006
 
-ENTRYPOINT ["./entrypoint.sh"]
+EXPOSE $PORT
 
-CMD ["python", "manage.py",  "runserver", "0.0.0.0:8000"]
+CMD ["node", "./src/index.js"]
