@@ -1,9 +1,9 @@
 version: "3.6"
 
 services:
-  hotel:
-    container_name: hotel-elmiriam-payment-svc
-    image: ranckosolutionsinc/mpesa-api:v2.0
+  checkout:
+    container_name: checkout-svc
+    image: ranckosolutionsinc/mpesa-api:v2.0-daraja
     build: ./
     restart: always
     environment:
@@ -11,11 +11,11 @@ services:
     env_file:
       - ./.env
     networks:
-      - hotel-elmiriam-network
+      - checkout-network
     # depends_on:
     #   - mongo
 
 networks:
-  hotel-elmiriam-network:
-    name: hotel-elmiriam
+  checkout-network:
+    name: checkout
     driver: bridge
