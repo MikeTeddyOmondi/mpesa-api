@@ -1,0 +1,38 @@
+@baseUrl = https://phoenix-liberal-man.ngrok-free.app
+
+### Simulate Lipa na Mpesa STK Push
+POST {{baseUrl}}/stk 
+Content-Type: application/json
+
+{
+    "phone": "0717135176",
+    "amount": "10" 
+}
+
+### GET Auth Token
+GET {{baseUrl}}/token 
+
+### GET Query Lipa na Mpesa STK Push 
+POST {{baseUrl}}/stkpushquery
+Content-Type: application/json
+
+{
+    "CheckoutRequestID": "ws_CO_09022024231141668717135176"
+}
+
+
+### All Successfull Transactions
+GET {{baseUrl}}/transactions 
+
+
+### Sample REsponse
+{
+  "MerchantRequestID": "be17-4b49-886b-71ba6eedc4f2398603",
+  "CheckoutRequestID": "ws_CO_09022024222424132717135176",
+  "ResponseCode": "0",
+  "ResponseDescription": "Success. Request accepted for processing",
+  "CustomerMessage": "Success. Request accepted for processing"
+}
+
+## Ngrok
+docker run -it -e NGROK_AUTHTOKEN=2GwBNBp49RD8ELwvRblPGn8BtYc_3cKqWCj6q1Qhfhr1SomM9 ngrok/ngrok http http://172.17.0.1:8006 --domain=phoenix-liberal-man.ngrok-free.app
